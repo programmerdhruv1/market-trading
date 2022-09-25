@@ -1,0 +1,23 @@
+<th:block th:fragment="stockData">
+
+	<div id="stock-list">
+
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">#</th>
+					<th scope="col">Name</th>
+					<th scope="col">Price</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="stock, itr : ${stocks}">
+					<th scope="row">[[${itr.count}]]</th>
+					<td>[[${stock.key}]]</td>
+					<td>[[${stock.value}]]</td>
+				</tr>
+			</tbody>
+		</table>
+
+	</div>
+</th:block>
