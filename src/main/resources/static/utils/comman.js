@@ -1,5 +1,4 @@
 function getUserLocation() {
-	console.log("call getUserLocation")
 	if (!navigator.userAgent.match(/bot|spider/i)) {
 		// Let's check if we have the value in localstorage
 		if (localStorage.getItem('country')) {
@@ -12,7 +11,6 @@ function getUserLocation() {
 				.then(data => {
 					// We have the data, let's cache it in localstorage before redirecting
 					localStorage.setItem('ipinfo', "IP: " + data.ip + ", loc: " + data.loc + ", Postal: " + data.postal + ", Region: " + data.region)
-					console.log(data);
 					$("#track-ip").text('IP: '+data.ip);
 					$("#track-loc").text(', Location: '+data.loc);
 					$("#track-region").text(', Address: '+data.city+', '+data.region+', '+data.country);
@@ -28,10 +26,9 @@ function getUpdatSymbols(id, flag) {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
-		url: 'http://localhost:8080/updatSymbols',
+		url: contextURL + 'updatSymbols',
 		data: {id: id, flag: flag},
 	}).done(function(data) {
-		console.log(data);
 		$("#symbol-list").html('');
 		$("#symbol-list").html(data);
 		getUpdatStocks();
@@ -42,7 +39,7 @@ function getUpdatStocks() {
 	$.ajax({
 		type: "GET",
 		contentType: "application/json; charset=utf-8",
-		url: 'http://localhost:8080/updatStocks',
+		url: contextURL+ 'updatStocks',
 	}).done(function(data) {
 		$(".display").hide();
 		$("#stock-list").html('');
